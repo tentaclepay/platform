@@ -4,6 +4,7 @@ import type {
   FacilitatorSuiSigner,
   SuiClientRegistry,
 } from "@tentaclepay/sui-x402";
+import { SUI_NETWORK_CAIP2_LIST } from "@tentaclepay/sui-x402";
 import { ExactSuiScheme } from "@tentaclepay/sui-x402/exact/facilitator";
 
 export const registerSuiExactScheme = (
@@ -12,7 +13,7 @@ export const registerSuiExactScheme = (
   clientRegistry?: SuiClientRegistry
 ) => {
   facilitator.register(
-    "sui:*",
+    [...SUI_NETWORK_CAIP2_LIST],
     new ExactSuiScheme(signer, {
       clientRegistry,
     })
