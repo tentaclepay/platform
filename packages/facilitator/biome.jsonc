@@ -6,5 +6,8 @@
   },
   "linter": {
     "includes": ["**", "!worker-configuration.d.ts"]
+  },
+  "assist": {
+    "includes": ["**", "!worker-configuration.d.ts"]
   }
 }
