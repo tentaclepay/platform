@@ -28,7 +28,7 @@ app.use(
         accepts: [
           {
             scheme: "exact",
-            price: "$0.001",
+            price: "$0.01",
             network: "sui:testnet",
             payTo: suiAddress,
           },
