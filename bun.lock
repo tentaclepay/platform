@@ -21,7 +21,7 @@
       "dependencies": {
         "@hono/zod-validator": "0.8.0",
         "@mysten/sui": "2.17.0",
-        "@tentaclepay/sui-x402": "2.1.2",
+        "@tentaclepay/sui-x402": "2.1.4",
         "@x402/core": "2.13.0",
         "hono": "4.12.22",
         "zod": "catalog:",
@@ -285,7 +285,7 @@
 
     "@tentaclepay/facilitator": ["@tentaclepay/facilitator@workspace:packages/facilitator"],
 
-    "@tentaclepay/sui-x402": ["@tentaclepay/sui-x402@2.1.2", "", { "dependencies": { "@x402/core": "2.12.0" }, "peerDependencies": { "@mysten/sui": "2.17.0", "zod": "4.4.3" } }, "sha512-p9PV/q1GAT+k+OrtivK/+Mffp0kH3pLwCCaNS6QU8Lk3qS7ai7yYmKddUPviNehiYDcr9Pn0CYJHYqqjZW+ypg=="],
+    "@tentaclepay/sui-x402": ["@tentaclepay/sui-x402@2.1.4", "", { "dependencies": { "@x402/core": "2.12.0" }, "peerDependencies": { "@mysten/sui": "2.17.0", "zod": "4.4.3" } }, "sha512-omGWWwJdReeC3mx7u4s8j7UxNIOc4Bez+zRJf6oY1l8u5I9hmKv6wm7+/kFhP1t1rgGkQHD+DwRk0qf3yiNL3Q=="],
 
     "@tsconfig/bun": ["@tsconfig/bun@1.0.10", "", {}, "sha512-5AV5YknQjNyoYzZ/8NG0dawqew/wH+x7ANiCfCIn29qo0cdbd1EryvFD1k5NSZWLBMOI/fGqMIaxi58GPIP9Cg=="],
 
