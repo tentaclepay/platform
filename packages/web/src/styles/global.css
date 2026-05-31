@@ -48,123 +48,73 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ============================================================
-   LIGHT MODE
-   Background: Snow (#F5F5F5 → oklch 0.97)
-   Primary:    Cyclone (#FF1A7A → oklch 0.60 0.27 354)
-   Accents:    Flamingo / Blush tones
-   ============================================================ */
 :root {
-  /* Base surfaces — near-white / soft snow */
-  --background: oklch(0.97 0 0);
-  --foreground: oklch(0.1 0 0);
-
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.141 0.005 285.823);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.1 0 0);
-
+  --card-foreground: oklch(0.141 0.005 285.823);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.1 0 0);
-
-  /* Primary — Cyclone pink */
-  --primary: oklch(0.6 0.27 354);
-  --primary-foreground: oklch(0.97 0.014 343);
-
-  /* Secondary — Petal (very soft pink tint) */
-  --secondary: oklch(0.93 0.04 350);
-  --secondary-foreground: oklch(0.2 0.02 354);
-
-  /* Muted — light pink-grey */
-  --muted: oklch(0.93 0.04 350);
-  --muted-foreground: oklch(0.48 0.06 354);
-
-  /* Accent — Flamingo */
-  --accent: oklch(0.93 0.04 350);
-  --accent-foreground: oklch(0.2 0.02 354);
-
-  /* Destructive — Magma deep red */
-  --destructive: oklch(0.46 0.24 18);
-
-  /* Borders & inputs */
-  --border: oklch(0.87 0.06 352);
-  --input: oklch(0.87 0.06 352);
-  --ring: oklch(0.6 0.27 354);
-
-  /* Charts — full brand pink spectrum */
-  --chart-1: oklch(0.76 0.17 348); /* Blush    */
-  --chart-2: oklch(0.68 0.23 350); /* Flamingo */
-  --chart-3: oklch(0.6 0.27 354); /* Cyclone  */
-  --chart-4: oklch(0.46 0.24 356); /* Ember    */
-  --chart-5: oklch(0.34 0.19 5); /* Magma    */
-
+  --popover-foreground: oklch(0.141 0.005 285.823);
+  --primary: oklch(0.6261 0.2363 3.8);
+  --primary-foreground: oklch(0.971 0.014 343.198);
+  --secondary: oklch(0.967 0.001 286.375);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --muted: oklch(0.967 0.001 286.375);
+  --muted-foreground: oklch(0.552 0.016 285.938);
+  --accent: oklch(0.7164 0.1989 357.08);
+  --accent-foreground: oklch(0.21 0.006 285.885);
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: oklch(0.92 0.004 286.32);
+  --input: oklch(0.92 0.004 286.32);
+  --ring: oklch(0.705 0.015 286.067);
+  --chart-1: oklch(0.823 0.12 346.018);
+  --chart-2: oklch(0.656 0.241 354.308);
+  --chart-3: oklch(0.592 0.249 0.584);
+  --chart-4: oklch(0.525 0.223 3.958);
+  --chart-5: oklch(0.459 0.187 3.815);
   --radius: 0.625rem;
-
-  /* Sidebar — crisp white surface */
-  --sidebar: oklch(1 0 0);
-  --sidebar-foreground: oklch(0.1 0 0);
-  --sidebar-primary: oklch(0.6 0.27 354);
-  --sidebar-primary-foreground: oklch(0.97 0.014 343);
-  --sidebar-accent: oklch(0.93 0.04 350);
-  --sidebar-accent-foreground: oklch(0.2 0.02 354);
-  --sidebar-border: oklch(0.87 0.06 352);
-  --sidebar-ring: oklch(0.6 0.27 354);
+  --sidebar: oklch(0.985 0 0);
+  --sidebar-foreground: oklch(0.141 0.005 285.823);
+  --sidebar-primary: oklch(0.592 0.249 0.584);
+  --sidebar-primary-foreground: oklch(0.971 0.014 343.198);
+  --sidebar-accent: oklch(0.967 0.001 286.375);
+  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
+  --sidebar-border: oklch(0.92 0.004 286.32);
+  --sidebar-ring: oklch(0.705 0.015 286.067);
 }
 
-/* ============================================================
-   DARK MODE
-   Background: Void (#0A0A0A) → Obsidian (#111) surfaces
-   Primary:    Cyclone / Ember
-   ============================================================ */
 .dark {
-  /* Base surfaces — void black */
-  --background: oklch(0.08 0 0);
-  --foreground: oklch(0.97 0 0);
-
-  --card: oklch(0.12 0 0);
-  --card-foreground: oklch(0.97 0 0);
-
-  --popover: oklch(0.12 0 0);
-  --popover-foreground: oklch(0.97 0 0);
-
-  /* Primary — slightly deepened Cyclone for dark bg */
-  --primary: oklch(0.46 0.24 356);
-  --primary-foreground: oklch(0.97 0.014 343);
-
-  /* Secondary — Pitch elevated surface */
-  --secondary: oklch(0.16 0.01 354);
-  --secondary-foreground: oklch(0.97 0 0);
-
-  /* Muted */
-  --muted: oklch(0.16 0.01 354);
-  --muted-foreground: oklch(0.6 0.1 352);
-
-  /* Accent */
-  --accent: oklch(0.16 0.01 354);
-  --accent-foreground: oklch(0.97 0 0);
-
-  /* Destructive — Magma */
-  --destructive: oklch(0.55 0.22 18);
-
-  /* Borders & inputs */
-  --border: oklch(0.18 0.02 354);
-  --input: oklch(0.22 0.03 354);
-  --ring: oklch(0.48 0.06 354);
-
-  /* Charts — same brand spectrum, slightly brightened for dark */
-  --chart-1: oklch(0.76 0.17 348); /* Blush    */
-  --chart-2: oklch(0.68 0.23 350); /* Flamingo */
-  --chart-3: oklch(0.6 0.27 354); /* Cyclone  */
-  --chart-4: oklch(0.46 0.24 356); /* Ember    */
-  --chart-5: oklch(0.34 0.19 5); /* Magma    */
-
-  /* Sidebar — Obsidian surface */
-  --sidebar: oklch(0.12 0 0);
-  --sidebar-foreground: oklch(0.97 0 0);
-  --sidebar-primary: oklch(0.68 0.23 350);
-  --sidebar-primary-foreground: oklch(0.97 0.014 343);
-  --sidebar-accent: oklch(0.16 0.01 354);
-  --sidebar-accent-foreground: oklch(0.97 0 0);
-  --sidebar-border: oklch(0.18 0.02 354);
-  --sidebar-ring: oklch(0.48 0.06 354);
+  --background: oklch(0.141 0.005 285.823);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.21 0.006 285.885);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.21 0.006 285.885);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.6261 0.2363 3.8);
+  --primary-foreground: oklch(0.971 0.014 343.198);
+  --secondary: oklch(0.274 0.006 286.033);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.274 0.006 286.033);
+  --muted-foreground: oklch(0.705 0.015 286.067);
+  --accent: oklch(0.7164 0.1989 357.08);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(0.25 0 0);
+  --input: oklch(0.35 0 0);
+  --ring: oklch(0.552 0.016 285.938);
+  --chart-1: oklch(0.823 0.12 346.018);
+  --chart-2: oklch(0.656 0.241 354.308);
+  --chart-3: oklch(0.592 0.249 0.584);
+  --chart-4: oklch(0.525 0.223 3.958);
+  --chart-5: oklch(0.459 0.187 3.815);
+  --sidebar: oklch(0.21 0.006 285.885);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.656 0.241 354.308);
+  --sidebar-primary-foreground: oklch(0.971 0.014 343.198);
+  --sidebar-accent: oklch(0.274 0.006 286.033);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.25 0 0);
+  --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
 @layer base {
