@@ -1,13 +1,10 @@
 ---
 import { ChevronRight } from "@lucide/astro";
-
-import heroBg from "@/assets/hero.png";
 ---
 
 <section
   id="hero"
-  class="flex w-full h-screen bg-cover bg-position-[60%] md:bg-center bg-no-repeat"
-  style={`background-image: url(${heroBg.src})`}
+  class="flex w-full h-screen bg-[url('/backgrounds/hero.webp')] bg-cover bg-position-[60%] md:bg-center bg-no-repeat"
 >
   <div
     class="flex flex-col container mx-auto justify-center md:justify-start md:pt-72 px-6 gap-6"
