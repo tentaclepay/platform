@@ -1,14 +1,17 @@
 ---
-import heroBg from "@/assets/hero.png";
 import { ChevronRight } from "@lucide/astro";
+
+import heroBg from "@/assets/hero.png";
 ---
 
 <section
   id="hero"
-  class="flex w-full h-screen bg-cover bg-center bg-no-repeat"
+  class="flex w-full h-screen bg-cover bg-position-[60%] md:bg-center bg-no-repeat"
   style={`background-image: url(${heroBg.src})`}
 >
-  <div class="flex flex-col container mx-auto pt-72 px-6 gap-6">
+  <div
+    class="flex flex-col container mx-auto justify-center md:justify-start md:pt-72 px-6 gap-6"
+  >
     <div class="flex flex-col">
       <h1 class="font-heading uppercase text-8xl">
         Let your <br />agents <span class="text-primary">transact</span>
@@ -27,7 +30,9 @@ import { ChevronRight } from "@lucide/astro";
         <ChevronRight class="size-4" />
         Start integrating
       </a>
-      <p class="inline-flex gap-2.5 items-end">
+      <p
+        class="flex flex-col gap-2.5 items-start md:inline-flex md:flex-row md:items-end"
+      >
         <span class="text-foreground/40 text-sm">
           Built exclusively for autonomous agents on
         </span>
