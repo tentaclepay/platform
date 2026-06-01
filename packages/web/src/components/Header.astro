@@ -1,0 +1,70 @@
+---
+import { Github } from "simple-icons-astro";
+import { ArrowUpRight } from "@lucide/astro";
+---
+
+<header
+  class="fixed left-0 top-0 z-50 w-full border-b border-border bg-background/10 backdrop-blur-lg"
+>
+  <div class="container mx-auto flex items-center justify-between px-6 py-3">
+    <!-- Logo + Title -->
+    <a
+      href="/"
+      class="flex items-center gap-2.5 shrink-0 transition-transform duration-150 ease-out active:scale-[0.98]"
+    >
+      <img src="/logo.svg" alt="Tentacle Pay" class="h-10 w-auto rounded-md" />
+      <span class="text-foreground font-semibold text-base tracking-tight"
+        >Tentacle Pay</span
+      >
+    </a>
+
+    <!-- Center Nav -->
+    <nav class="hidden md:flex items-center gap-1">
+      {
+        [
+          { label: "Payments", href: "#payments" },
+          { label: "Cross-Chain", href: "#cross-chain" },
+          { label: "Wallet", href: "#wallet" },
+          {
+            label: "Docs",
+            href: "https://docs.tentaclepay.com",
+            external: true,
+          },
+        ].map(({ label, href, external }) => {
+          if (external)
+            return (
+              <a
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                class="inline-flex items-center gap-1 px-3.5 py-1.5 text-sm text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
+              >
+                {label}
+                <ArrowUpRight class="size-4" />
+              </a>
+            );
+
+          return (
+            <a
+              href={href}
+              class="px-3.5 py-1.5 text-sm text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
+            >
+              {label}
+            </a>
+          );
+        })
+      }
+    </nav>
+
+    <!-- GitHub CTA -->
+    <a
+      href="https://github.com/tentaclepay"
+      target="_blank"
+      rel="noreferrer"
+      class="inline-flex items-center gap-2 text-sm text-muted-foreground transition-[color,transform] duration-150 ease-out hover:text-foreground active:scale-[0.98]"
+    >
+      <Github class="size-4" />
+      github/tentaclepay
+    </a>
+  </div>
+</header>

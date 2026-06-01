@@ -1,0 +1,42 @@
+---
+import heroBg from "@/assets/hero.png";
+import { ChevronRight } from "@lucide/astro";
+---
+
+<section
+  id="hero"
+  class="flex w-full h-screen bg-cover bg-center bg-no-repeat"
+  style={`background-image: url(${heroBg.src})`}
+>
+  <div class="flex flex-col container mx-auto pt-72 px-6 gap-6">
+    <div class="flex flex-col">
+      <h1 class="font-heading uppercase text-8xl">
+        Let your <br />agents <span class="text-primary">transact</span>
+      </h1>
+      <p class="text-sm text-foreground/60">
+        Agents are already running code. Now, let them run the economy.
+      </p>
+    </div>
+    <div class="flex flex-col gap-2">
+      <a
+        href="https://docs.tentaclepay.com"
+        target="_blank"
+        rel="noreferrer"
+        class="inline-flex w-fit bg-primary pl-3 font-mono text-primary-foreground hover:bg-primary/80 active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out px-5 h-10 rounded-lg items-center justify-center gap-1.5 uppercase font-medium"
+      >
+        <ChevronRight class="size-4" />
+        Start integrating
+      </a>
+      <p class="inline-flex gap-2.5 items-end">
+        <span class="text-foreground/40 text-sm">
+          Built exclusively for autonomous agents on
+        </span>
+        <img
+          src="/sui_full_white.svg"
+          alt="Sui"
+          class="inline-flex h-6 w-auto opacity-50"
+        />
+      </p>
+    </div>
+  </div>
+</section>
