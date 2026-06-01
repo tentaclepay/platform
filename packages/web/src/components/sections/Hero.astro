@@ -18,15 +18,23 @@ import { ChevronRight } from "@lucide/astro";
       </p>
     </div>
     <div class="flex flex-col gap-2">
-      <a
-        href="https://docs.tentaclepay.com"
-        target="_blank"
-        rel="noreferrer"
-        class="inline-flex w-fit bg-primary pl-3 font-mono text-primary-foreground hover:bg-primary/80 active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out px-5 h-10 rounded-lg items-center justify-center gap-1.5 uppercase font-medium"
-      >
-        <ChevronRight class="size-4" />
-        Start integrating
-      </a>
+      <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+        <a
+          href="#payments"
+          class="inline-flex w-fit bg-primary font-mono text-primary-foreground hover:bg-primary/80 active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out px-5 h-10 rounded-lg items-center justify-center font-medium"
+        >
+          Explore
+        </a>
+        <a
+          href="https://docs.tentaclepay.com"
+          target="_blank"
+          rel="noreferrer"
+          class="inline-flex w-fit font-mono text-foreground border border-primary/60 hover:border-primary active:scale-[0.97] transition-[transform,border] duration-150 ease-out px-5 pr-3 gap-1.5 h-10 rounded-lg items-center justify-center font-medium"
+        >
+          Read the docs
+          <ChevronRight class="size-4" />
+        </a>
+      </div>
       <p
         class="flex flex-col gap-2.5 items-start md:inline-flex md:flex-row md:items-end"
       >

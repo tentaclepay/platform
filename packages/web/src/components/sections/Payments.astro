@@ -1,1 +1,192 @@
-<section id="payments" class="h-screen"></section>
+---
+import { Copy, CopyCheck } from "@lucide/astro";
+
+const tabs = [
+  { id: "x402", label: "x402", status: "Live" },
+  { id: "mpp", label: "MPP", status: "Soon" },
+] as const;
+---
+
+<section
+  id="payments"
+  class="relative w-full min-h-screen flex items-center py-24 md:py-0 overflow-hidden"
+>
+  <!-- Background: octopus (full-bleed + dimmed on mobile, right-aligned on desktop) -->
+  <div
+    class="absolute inset-0 z-0 select-none pointer-events-none"
+    aria-hidden="true"
+  >
+    <img
+      src="/backgrounds/payments.webp"
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover object-center brightness-40 md:inset-y-0 md:left-auto md:right-0 md:h-full md:w-auto md:max-w-[60%] md:object-contain md:object-right md:brightness-75 mask-[radial-gradient(closest-side,black_70%,transparent)]"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  <div
+    class="relative z-10 container mx-auto grid items-center gap-12 px-6 md:grid-cols-2 md:gap-16"
+  >
+    <!-- Left: content -->
+    <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
+        <span
+          class="font-mono text-xs uppercase tracking-widest text-muted-foreground"
+        >
+          // Rails
+        </span>
+        <h2 class="font-heading uppercase text-6xl md:text-8xl leading-[0.95]">
+          The <span class="text-primary">Payment</span> Rails
+        </h2>
+        <p class="text-sm text-foreground/60 max-w-md">
+          Pick the rail your agents need — both settle natively on Sui.
+        </p>
+      </div>
+
+      <!-- Tabs -->
+      <div
+        role="tablist"
+        aria-label="Payment rails"
+        class="flex w-fit gap-1 rounded-xl border border-border bg-card/40 p-1"
+      >
+        {
+          tabs.map(({ id, label, status }) => (
+            <button
+              type="button"
+              role="tab"
+              id={`tab-${id}`}
+              aria-controls={`panel-${id}`}
+              aria-selected={id === "x402"}
+              class="group inline-flex items-center gap-2 rounded-lg px-4 h-9 font-mono text-sm font-medium text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground aria-selected:bg-primary aria-selected:text-primary-foreground"
+            >
+              {label}
+              <span
+                class:list={[
+                  "inline-flex items-center gap-1.5 rounded-full px-2 py-0.5 text-[10px] uppercase tracking-wider",
+                  id === "x402"
+                    ? "bg-primary/15 text-primary group-aria-selected:bg-primary-foreground/20 group-aria-selected:text-primary-foreground"
+                    : "bg-muted text-muted-foreground",
+                ]}
+              >
+                {id === "x402" && (
+                  <span class="size-1.5 rounded-full bg-current" />
+                )}
+                {status}
+              </span>
+            </button>
+          ))
+        }
+      </div>
+
+      <!-- Panels: stacked in one grid cell so the taller one reserves the height (no layout shift on switch) -->
+      <div class="grid">
+        <!-- Panel: x402 -->
+        <div
+          role="tabpanel"
+          id="panel-x402"
+          aria-labelledby="tab-x402"
+          class="col-start-1 row-start-1 flex flex-col gap-5 transition-opacity duration-150 ease-out data-[inactive]:pointer-events-none data-[inactive]:invisible data-[inactive]:opacity-0"
+        >
+          <p class="text-base text-foreground/70 max-w-md leading-relaxed">
+            <span class="text-foreground font-medium">x402</span> — The HTTP-native
+            rail. The agent pays, the request clears — no checkout, no human in the
+            loop. Stablecoins move <span class="text-primary font-medium"
+              >gasless</span
+            > on Sui, and our facilitator sponsors gas for every other Sui coin.
+          </p>
+          <div
+            class="flex w-fit items-center gap-3 rounded-lg border border-border bg-card/40 px-4 h-10 font-mono text-sm"
+          >
+            <span class="select-none text-muted-foreground">$</span>
+            <code class="text-foreground">npm i @tentaclepay/sui-x402</code>
+            <button
+              type="button"
+              data-copy="npm i @tentaclepay/sui-x402"
+              aria-label="Copy install command"
+              class="group ml-1 text-muted-foreground transition-colors hover:text-foreground active:scale-[0.97]"
+            >
+              <Copy class="size-3.5 group-data-[copied]:hidden" />
+              <CopyCheck
+                class="hidden size-3.5 text-primary group-data-[copied]:block"
+              />
+            </button>
+          </div>
+          <a
+            href="https://docs.tentaclepay.com/x402/quickstart"
+            target="_blank"
+            rel="noreferrer"
+            class="inline-flex w-fit font-mono text-primary hover:text-primary-foreground active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out h-9 rounded-lg items-center justify-center text-sm font-medium"
+          >
+            Read the quickstart
+          </a>
+        </div>
+
+        <!-- Panel: MPP -->
+        <div
+          role="tabpanel"
+          id="panel-mpp"
+          aria-labelledby="tab-mpp"
+          class="col-start-1 row-start-1 flex flex-col gap-5 transition-opacity duration-150 ease-out data-[inactive]:pointer-events-none data-[inactive]:invisible data-[inactive]:opacity-0"
+          data-inactive
+        >
+          <p class="text-base text-foreground/70 max-w-md leading-relaxed">
+            <span class="text-foreground font-medium"
+              >Machine Payment Protocol</span
+            > — an open protocol for machine-to-machine payments, arriving natively
+            on Sui.
+          </p>
+          <span
+            class="inline-flex w-fit items-center gap-1.5 rounded-lg border border-border px-5 h-9 font-mono font-medium text-sm text-muted-foreground cursor-not-allowed select-none"
+          >
+            Coming soon
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const tabs = document.querySelectorAll<HTMLButtonElement>(
+    '#payments [role="tab"]',
+  );
+  const panels = document.querySelectorAll<HTMLElement>(
+    '#payments [role="tabpanel"]',
+  );
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => t.setAttribute("aria-selected", String(t === tab)));
+      panels.forEach((p) =>
+        p.toggleAttribute(
+          "data-inactive",
+          p.id !== tab.getAttribute("aria-controls"),
+        ),
+      );
+    });
+  });
+
+  document
+    .querySelectorAll<HTMLButtonElement>("#payments [data-copy]")
+    .forEach((button) => {
+      const defaultLabel = button.getAttribute("aria-label") ?? "Copy";
+      let resetTimer: ReturnType<typeof setTimeout> | undefined;
+      button.addEventListener("click", async () => {
+        const text = button.dataset.copy;
+        if (!text) return;
+        try {
+          await navigator.clipboard.writeText(text);
+          button.setAttribute("data-copied", "");
+          button.setAttribute("aria-label", "Copied");
+          clearTimeout(resetTimer);
+          resetTimer = setTimeout(() => {
+            button.removeAttribute("data-copied");
+            button.setAttribute("aria-label", defaultLabel);
+          }, 1000);
+        } catch {
+          /* clipboard unavailable — no-op */
+        }
+      });
+    });
+</script>
