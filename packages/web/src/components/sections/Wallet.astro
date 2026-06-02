@@ -1,0 +1,92 @@
+---
+import { Globe, Bot, ShieldCheck, Coins } from "@lucide/astro";
+
+const features = [
+  {
+    icon: Globe,
+    label: "Pay to any chain",
+    body: "Fund one Sui wallet; pay services on any chain.",
+  },
+  {
+    icon: Bot,
+    label: "Agents pay on their own",
+    body: "Autonomous payments — no human in the loop.",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Spending limits & rules",
+    body: "Set the limits. The wallet enforces them.",
+  },
+  {
+    icon: Coins,
+    label: "Gasless stablecoins",
+    body: "Pay in Sui stablecoins. Zero gas.",
+  },
+] as const;
+---
+
+<section
+  id="wallet"
+  class="relative w-full min-h-screen flex items-center py-24 md:py-0 overflow-hidden"
+>
+  <!-- Background slot (RIGHT). Image to be supplied later → /backgrounds/wallet.webp -->
+  <div
+    class="absolute inset-0 z-0 select-none pointer-events-none"
+    aria-hidden="true"
+  >
+    {
+      /* TODO: add /backgrounds/wallet.webp, then uncomment:
+    <img
+      src="/backgrounds/wallet.webp"
+      alt=""
+      class="absolute inset-0 h-full w-full object-cover object-center brightness-40 md:inset-y-0 md:left-auto md:right-0 md:h-full md:w-auto md:max-w-[60%] md:object-contain md:object-right md:brightness-75 mask-[radial-gradient(closest-side,black_70%,transparent)]"
+      loading="lazy"
+      decoding="async"
+    />
+    */
+    }
+  </div>
+
+  <div
+    class="relative z-10 container mx-auto grid items-center gap-12 px-6 md:grid-cols-2 md:gap-16"
+  >
+    <!-- Left: content -->
+    <div class="flex flex-col gap-6">
+      <div class="flex flex-col gap-3">
+        <span
+          class="font-mono text-xs uppercase tracking-widest text-muted-foreground"
+        >
+          // Wallet
+        </span>
+        <h2 class="font-heading uppercase text-6xl md:text-8xl leading-[0.95]">
+          Fund Once.<br />Pay <span class="text-primary">Anywhere</span>.
+        </h2>
+        <p class="text-sm text-foreground/60 max-w-md">
+          A wallet built for autonomous agents on Sui.
+        </p>
+      </div>
+
+      <ul class="flex flex-col gap-4">
+        {
+          features.map(({ icon: Icon, label, body }) => (
+            <li class="flex gap-3">
+              <Icon class="mt-0.5 size-5 shrink-0 text-primary" />
+              <div class="flex flex-col gap-0.5">
+                <span class="text-foreground font-medium">{label}</span>
+                <span class="text-sm text-foreground/60 max-w-sm leading-relaxed">
+                  {body}
+                </span>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <span
+        class="inline-flex w-fit items-center gap-1.5 rounded-lg border border-border px-5 h-9 font-mono font-medium text-sm text-muted-foreground cursor-not-allowed select-none"
+      >
+        Coming soon
+      </span>
+    </div>
+  </div>
+</section>
