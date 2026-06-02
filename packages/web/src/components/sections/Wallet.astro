@@ -8,6 +8,11 @@ const features = [
     body: "Your agent holds it and pays on its own — no human in the loop.",
   },
   {
+    icon: ShieldCheck,
+    label: "Rules it can't break",
+    body: "Set the limits. The wallet enforces them on every spend.",
+  },
+  {
     icon: Coins,
     label: "Gasless on Sui",
     body: "Pay in Sui stablecoins. Zero gas, every payment.",
@@ -16,11 +21,6 @@ const features = [
     icon: Globe,
     label: "Pay across chains",
     body: "Pay in Sui — it settles on the destination chain. Built right in.",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Rules it can't break",
-    body: "Set the limits. The wallet enforces them on every spend.",
   },
 ] as const;
 ---
@@ -59,7 +59,7 @@ const features = [
           // Wallet
         </span>
         <h2 class="font-heading uppercase text-6xl md:text-8xl leading-[0.95]">
-          Wallet for <span class="text-primary">Agents</span>
+          Let your agents<br />spend <span class="text-primary">safely</span>
         </h2>
         <p class="text-sm text-foreground/60 max-w-md">
           Built for autonomous agents on Sui. Inspired by <a
