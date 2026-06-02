@@ -1,6 +1,6 @@
 ---
-import { Github } from "simple-icons-astro";
 import { ArrowUpRight } from "@lucide/astro";
+import { Github } from "simple-icons-astro";
 ---
 
 <header
@@ -36,7 +36,7 @@ import { ArrowUpRight } from "@lucide/astro";
               <a
                 href={href}
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
                 class="inline-flex items-center gap-1 px-3.5 py-1.5 text-sm text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
               >
                 {label}
@@ -60,7 +60,7 @@ import { ArrowUpRight } from "@lucide/astro";
     <a
       href="https://github.com/tentaclepay"
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer"
       class="inline-flex items-center gap-2 text-sm text-muted-foreground transition-[color,transform] duration-150 ease-out hover:text-foreground active:scale-[0.98]"
     >
       <Github class="size-4" />
