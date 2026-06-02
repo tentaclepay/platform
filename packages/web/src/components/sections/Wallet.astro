@@ -3,24 +3,24 @@ import { Globe, Bot, ShieldCheck, Coins } from "@lucide/astro";
 
 const features = [
   {
-    icon: Globe,
-    label: "Pay to any chain",
-    body: "Fund one Sui wallet; pay services on any chain.",
-  },
-  {
     icon: Bot,
-    label: "Agents pay on their own",
-    body: "Autonomous payments — no human in the loop.",
-  },
-  {
-    icon: ShieldCheck,
-    label: "Spending limits & rules",
-    body: "Set the limits. The wallet enforces them.",
+    label: "Made for agents",
+    body: "Your agent holds it and pays on its own — no human in the loop.",
   },
   {
     icon: Coins,
-    label: "Gasless stablecoins",
-    body: "Pay in Sui stablecoins. Zero gas.",
+    label: "Gasless on Sui",
+    body: "Pay in Sui stablecoins. Zero gas, every payment.",
+  },
+  {
+    icon: Globe,
+    label: "Pay across chains",
+    body: "Pay in Sui — it settles on the destination chain. Built right in.",
+  },
+  {
+    icon: ShieldCheck,
+    label: "Rules it can't break",
+    body: "Set the limits. The wallet enforces them on every spend.",
   },
 ] as const;
 ---
@@ -59,10 +59,16 @@ const features = [
           // Wallet
         </span>
         <h2 class="font-heading uppercase text-6xl md:text-8xl leading-[0.95]">
-          Fund Once.<br />Pay <span class="text-primary">Anywhere</span>.
+          Wallet for <span class="text-primary">Agents</span>
         </h2>
         <p class="text-sm text-foreground/60 max-w-md">
-          A wallet built for autonomous agents on Sui.
+          Built for autonomous agents on Sui. Inspired by <a
+            href="https://openwallet.sh"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="underline decoration-dotted underline-offset-4 transition-colors hover:text-primary"
+            >OWS</a
+          >.
         </p>
       </div>
 
