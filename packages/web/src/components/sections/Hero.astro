@@ -4,7 +4,7 @@ import { ChevronRight } from "@lucide/astro";
 
 <section
   id="hero"
-  class="relative flex w-full h-screen before:content-[''] before:absolute before:inset-0 before:-z-10 before:bg-[url('/images/hero.webp')] before:bg-cover before:bg-position-[30%] before:brightness-40 md:before:brightness-70 md:before:bg-center before:bg-no-repeat"
+  class="relative flex w-full h-screen before:content-[''] before:absolute before:inset-0 before:-z-10 before:bg-[url('/images/hero.webp')] before:bg-cover before:bg-position-[30%] before:brightness-40 md:before:brightness-70 md:before:bg-center before:bg-no-repeat before:mask-[radial-gradient(closest-side,black_70%,transparent)]"
 >
   <div
     class="flex flex-col container mx-auto justify-center md:justify-start md:pt-36 xl:pt-72 px-6 gap-6"
@@ -36,7 +36,7 @@ import { ChevronRight } from "@lucide/astro";
         </a>
       </div>
       <p
-        class="flex flex-col gap-2.5 items-start md:inline-flex md:flex-row md:items-end"
+        class="flex flex-col gap-x-2.5 gap-y-1 items-start md:inline-flex md:flex-row md:items-end"
       >
         <span class="text-foreground/40 text-sm">
           Built exclusively for autonomous agents on
