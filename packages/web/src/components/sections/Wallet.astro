@@ -34,17 +34,13 @@ const features = [
     class="absolute inset-0 z-0 select-none pointer-events-none"
     aria-hidden="true"
   >
-    {
-      /* TODO: add /backgrounds/wallet.webp, then uncomment:
     <img
-      src="/backgrounds/wallet.webp"
+      src="/images/wallet.webp"
       alt=""
-      class="absolute inset-0 h-full w-full object-cover object-center brightness-40 md:inset-y-0 md:left-auto md:right-0 md:h-full md:w-auto md:max-w-[60%] md:object-contain md:object-right md:brightness-75 mask-[radial-gradient(closest-side,black_70%,transparent)]"
+      class="absolute inset-0 h-full w-full object-cover object-center brightness-40 md:inset-y-0 md:left-auto md:right-48 md:h-full md:w-auto md:max-w-[60%] md:object-contain md:object-right md:brightness-75 mask-[radial-gradient(closest-side,black_70%,transparent)]"
       loading="lazy"
       decoding="async"
     />
-    */
-    }
   </div>
 
   <div
@@ -59,7 +55,7 @@ const features = [
           // Wallet
         </span>
         <h2 class="font-heading uppercase text-6xl md:text-8xl leading-[0.95]">
-          Let your agents<br />spend <span class="text-primary">safely</span>
+          Let your agents spend <span class="text-primary">safely</span>
         </h2>
         <p class="text-sm text-foreground/60 max-w-md">
           Built for autonomous agents on Sui. Inspired by <a
@@ -79,7 +75,7 @@ const features = [
               <Icon class="mt-0.5 size-5 shrink-0 text-primary" />
               <div class="flex flex-col gap-0.5">
                 <span class="text-foreground font-medium">{label}</span>
-                <span class="text-sm text-foreground/60 max-w-sm leading-relaxed">
+                <span class="text-sm text-foreground/60 max-w-md leading-relaxed">
                   {body}
                 </span>
               </div>
