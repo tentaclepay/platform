@@ -1,0 +1,127 @@
+---
+import { ArrowUpRight } from "@lucide/astro";
+import { Github, X } from "simple-icons-astro";
+
+const socials = [
+  { label: "GitHub", href: "https://github.com/tentaclepay", Icon: Github },
+  { label: "X", href: "https://x.com/tentaclepay", Icon: X },
+];
+
+const productLinks = [
+  { label: "Payments", href: "#payments" },
+  { label: "Cross-Chain", href: "#cross-chain" },
+  { label: "Wallet", href: "#wallet" },
+];
+
+const resourceLinks = [
+  { label: "Docs", href: "https://docs.tentaclepay.com", external: true },
+  { label: "GitHub", href: "https://github.com/tentaclepay", external: true },
+];
+---
+
+<footer class="relative w-full border-t border-border bg-background">
+  <div class="container mx-auto px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
+      <!-- Brand -->
+      <div class="flex flex-col gap-4">
+        <a
+          href="#hero"
+          class="flex items-center gap-2.5 w-fit transition-transform duration-150 ease-out active:scale-[0.98]"
+        >
+          <img
+            src="/logo.svg"
+            alt="Tentacle Pay"
+            class="h-10 w-auto rounded-md"
+          />
+          <span class="text-foreground font-semibold text-base tracking-tight"
+            >Tentacle Pay</span
+          >
+        </a>
+        <p class="text-sm text-foreground/50 max-w-xs leading-relaxed">
+          Payment infrastructure for autonomous agents on Sui.
+        </p>
+        <div class="flex items-center gap-1.5 pt-1">
+          {
+            socials.map(({ label, href, Icon }) => (
+              <a
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                class="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-[color,background-color,transform] duration-150 ease-out hover:text-foreground hover:bg-card active:scale-[0.95]"
+              >
+                <Icon class="size-4" />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Product -->
+      <div class="flex flex-col gap-3">
+        <span
+          class="font-mono text-xs uppercase tracking-widest text-muted-foreground"
+        >
+          Product
+        </span>
+        <ul class="flex flex-col gap-2.5">
+          {
+            productLinks.map(({ label, href }) => (
+              <li>
+                <a
+                  href={href}
+                  class="text-sm text-foreground/60 transition-colors duration-150 ease-out hover:text-foreground"
+                >
+                  {label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Resources -->
+      <div class="flex flex-col gap-3">
+        <span
+          class="font-mono text-xs uppercase tracking-widest text-muted-foreground"
+        >
+          Resources
+        </span>
+        <ul class="flex flex-col gap-2.5">
+          {
+            resourceLinks.map(({ label, href }) => (
+              <li>
+                <a
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-1 text-sm text-foreground/60 transition-colors duration-150 ease-out hover:text-foreground"
+                >
+                  {label}
+                  <ArrowUpRight class="size-3.5" />
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div
+      class="mt-12 flex flex-col-reverse items-start gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between"
+    >
+      <p class="text-xs text-foreground/40">
+        © {new Date().getFullYear()} Tentacle Pay. All rights reserved.
+      </p>
+      <span class="inline-flex items-center gap-2">
+        <span class="text-xs text-foreground/40">Built on</span>
+        <img
+          src="/sui_full_white.svg"
+          alt="Sui"
+          class="h-4 w-auto opacity-40"
+        />
+      </span>
+    </div>
+  </div>
+</footer>
