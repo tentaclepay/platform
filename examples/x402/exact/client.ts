@@ -49,6 +49,6 @@ if (response.ok) {
   );
   console.log(
     "Transaction:",
-    `https://suiscan.xyz/testnet/tx/${paymentResponse.transaction}`
+    `https://testnet.suivision.xyz/txblock/${paymentResponse.transaction}`
   );
 }
