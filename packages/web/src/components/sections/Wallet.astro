@@ -1,5 +1,12 @@
 ---
-import { Bot, Coins, Globe, ShieldCheck } from "@lucide/astro";
+import {
+  Bot,
+  Coins,
+  Fingerprint,
+  Globe,
+  RotateCcw,
+  ShieldCheck,
+} from "@lucide/astro";
 
 const features = [
   {
@@ -23,6 +30,110 @@ const features = [
     body: "Pay in Sui — it settles on the destination chain. Built right in.",
   },
 ] as const;
+
+/* Terminal demo: bare curl hits the 402 paywall, tpay curl clears it.
+   Markup carries the full transcripts so no-JS and reduced-motion visitors
+   read the static story; the script types and replays the animated one. */
+const demoUrl = "https://api.weather.ai/forecast";
+
+const punct = "text-muted-foreground";
+const key = "text-accent";
+const str = "text-foreground/85";
+const indents = ["", "pl-[2ch]", "pl-[4ch]"];
+
+const runs = [
+  {
+    // command: [{ text: `curl ${demoUrl}`, class: "text-foreground" }],
+    command: [
+      { text: "curl", class: "text-green-500" },
+      { text: ` ${demoUrl}`, class: "text-foreground" },
+    ],
+    lines: [
+      {
+        indent: 0,
+        segs: [
+          { text: "HTTP/1.1 402 Payment Required", class: "text-destructive" },
+        ],
+      },
+      { indent: 0, segs: [{ text: "{", class: punct }] },
+      {
+        indent: 1,
+        segs: [
+          { text: '"error"', class: key },
+          { text: ": ", class: punct },
+          { text: '"payment_required"', class: str },
+          { text: ",", class: punct },
+        ],
+      },
+      {
+        indent: 1,
+        segs: [
+          { text: '"accepts"', class: key },
+          { text: ": [{", class: punct },
+        ],
+      },
+      {
+        indent: 2,
+        segs: [
+          { text: '"amount"', class: key },
+          { text: ": ", class: punct },
+          { text: '"10000"', class: str },
+          { text: ",", class: punct },
+        ],
+      },
+      {
+        indent: 2,
+        segs: [
+          { text: '"token"', class: key },
+          { text: ": ", class: punct },
+          { text: '"USDC"', class: str },
+        ],
+      },
+      { indent: 1, segs: [{ text: "}]", class: punct }] },
+      { indent: 0, segs: [{ text: "}", class: punct }] },
+    ],
+  },
+  {
+    command: [
+      { text: "tpay", class: "text-green-500" },
+      { text: ` curl ${demoUrl}`, class: "text-foreground" },
+    ],
+    lines: [
+      {
+        indent: 0,
+        segs: [{ text: "HTTP/1.1 200 OK", class: "text-green-400" }],
+      },
+      { indent: 0, segs: [{ text: "{", class: punct }] },
+      {
+        indent: 1,
+        segs: [
+          { text: '"location"', class: key },
+          { text: ": ", class: punct },
+          { text: '"Tokyo, Japan"', class: str },
+          { text: ",", class: punct },
+        ],
+      },
+      {
+        indent: 1,
+        segs: [
+          { text: '"temperature"', class: key },
+          { text: ": ", class: punct },
+          { text: '"26°C"', class: str },
+          { text: ",", class: punct },
+        ],
+      },
+      {
+        indent: 1,
+        segs: [
+          { text: '"forecast"', class: key },
+          { text: ": ", class: punct },
+          { text: '"Humid & warm"', class: str },
+        ],
+      },
+      { indent: 0, segs: [{ text: "}", class: punct }] },
+    ],
+  },
+];
 ---
 
 <section
@@ -71,11 +182,11 @@ const features = [
       <div data-reveal-group class="flex flex-col gap-6">
         <p class="max-w-md text-sm text-foreground/60">
           Built for autonomous agents on Sui. Inspired by <a
-            href="https://openwallet.sh"
+            href="https://pay.sh"
             target="_blank"
             rel="noopener noreferrer"
             class="underline decoration-dotted underline-offset-4 transition-colors hover:text-primary"
-            >OWS</a
+            >pay.sh</a
           >.
         </p>
 
@@ -105,5 +216,283 @@ const features = [
         </span>
       </div>
     </div>
+
+    <!-- Right: terminal demo -->
+    <div data-reveal class="relative w-full md:max-w-xl md:justify-self-end">
+      <div data-terminal class="relative border border-border bg-card/80">
+        <!-- Window chrome -->
+        <div
+          class="flex h-9 items-center gap-2 border-b border-border bg-secondary/60 px-4"
+        >
+          <span class="size-2.5 rounded-full bg-red-500/80"></span>
+          <span class="size-2.5 rounded-full bg-yellow-500/80"></span>
+          <span class="size-2.5 rounded-full bg-green-500/80"></span>
+          <button
+            type="button"
+            data-replay
+            aria-label="Replay demo"
+            class="ml-auto hidden text-muted-foreground transition-colors hover:text-foreground active:scale-[0.97]"
+          >
+            <RotateCcw class="size-3.5" />
+          </button>
+        </div>
+
+        <div
+          class="relative min-h-[19rem] p-5 font-mono text-xs leading-6 sm:text-[13px]"
+        >
+          <!-- Static transcript: no-JS and reduced-motion fallback -->
+          <div class="js:motion-safe:sr-only">
+            {
+              runs.map((run, i) => (
+                <div class:list={[i > 0 && "mt-6"]}>
+                  <p class="break-all">
+                    <span class="select-none text-muted-foreground">$</span>
+                    {run.command.map((seg) => (
+                      <span class={seg.class}>{seg.text}</span>
+                    ))}
+                  </p>
+                  {run.lines.map((line) => (
+                    <div class={indents[line.indent]}>
+                      {line.segs.map((seg) => (
+                        <span class={seg.class}>{seg.text}</span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))
+            }
+          </div>
+
+          <!-- Animated transcript: script types the command, pops lines in -->
+          <div aria-hidden="true" class="hidden js:motion-safe:block">
+            {
+              runs.map((run, i) => (
+                <div data-run class:list={[i > 0 && "hidden"]}>
+                  <p class="break-all">
+                    <span class="select-none text-muted-foreground">$</span>
+                    {run.command.map((seg) => (
+                      <span class={seg.class} data-type data-text={seg.text} />
+                    ))}
+                    <span
+                      data-caret
+                      class="ml-0.5 hidden h-[1.1em] w-[0.55em] translate-y-[3px] bg-foreground/70 motion-safe:animate-pulse"
+                    />
+                  </p>
+                  {run.lines.map((line) => (
+                    <div
+                      data-line
+                      class:list={["opacity-0", indents[line.indent]]}
+                    >
+                      {line.segs.map((seg) => (
+                        <span class={seg.class}>{seg.text}</span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Spending approval overlay -->
+        <div
+          data-approval
+          aria-hidden="true"
+          class="absolute inset-0 z-10 hidden items-center justify-center bg-background/40 backdrop-blur-[3px]"
+        >
+          <div
+            data-approval-card
+            class="flex flex-col items-center gap-1.5 bg-foreground px-7 py-4 text-background shadow-2xl"
+          >
+            <span data-approval-icon>
+              <Fingerprint class="size-12" />
+            </span>
+            <span
+              class="mt-2 font-mono text-xs font-medium uppercase tracking-widest text-background/60"
+            >
+              Spending approval
+            </span>
+            <span class="font-semibold tracking-tight">$0.01</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const root = document.querySelector<HTMLElement>("#wallet [data-terminal]");
+  const runEls = root
+    ? Array.from(root.querySelectorAll<HTMLElement>("[data-run]"))
+    : [];
+  const approval = root?.querySelector<HTMLElement>("[data-approval]");
+  const approvalCard = root?.querySelector<HTMLElement>("[data-approval-card]");
+  const approvalIcon = root?.querySelector<HTMLElement>("[data-approval-icon]");
+  const replayButton = root?.querySelector<HTMLButtonElement>("[data-replay]");
+
+  if (
+    root &&
+    runEls.length === 2 &&
+    approval &&
+    approvalCard &&
+    approvalIcon &&
+    replayButton &&
+    !reduced.matches
+  ) {
+    const denied = runEls[0]!;
+    const paid = runEls[1]!;
+
+    /* Bumping the generation cancels any in-flight playback (replay clicks). */
+    let generation = 0;
+
+    const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+    const showCaret = (run: HTMLElement, on: boolean) => {
+      const caret = run.querySelector("[data-caret]");
+      if (on) caret?.classList.replace("hidden", "inline-block");
+      else caret?.classList.replace("inline-block", "hidden");
+    };
+
+    /* Card border snaps to the error color — a blip, deliberately untransitioned. */
+    const setErrorBorder = (on: boolean) => {
+      if (on) root.classList.replace("border-border", "border-destructive");
+      else root.classList.replace("border-destructive", "border-border");
+    };
+
+    const blipErrorBorder = async () => {
+      setErrorBorder(true);
+      await sleep(120);
+      setErrorBorder(false);
+      await sleep(120);
+      setErrorBorder(true);
+      await sleep(400);
+    };
+
+    const typeCommand = async (run: HTMLElement, live: () => boolean) => {
+      showCaret(run, true);
+      await sleep(500);
+      for (const seg of Array.from(
+        run.querySelectorAll<HTMLElement>("[data-type]"),
+      )) {
+        for (const char of seg.dataset.text ?? "") {
+          if (!live()) return;
+          seg.textContent = (seg.textContent ?? "") + char;
+          await sleep(24 + Math.random() * 36);
+        }
+      }
+      await sleep(420);
+    };
+
+    const printLines = async (run: HTMLElement, live: () => boolean) => {
+      for (const line of Array.from(
+        run.querySelectorAll<HTMLElement>("[data-line]"),
+      )) {
+        if (!live()) return;
+        gsap.fromTo(
+          line,
+          { opacity: 0, y: 5 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.25,
+            ease: "power2.out",
+            clearProps: "transform",
+          },
+        );
+        await sleep(95);
+      }
+    };
+
+    const reset = () => {
+      generation++;
+      gsap.killTweensOf([denied, paid, approval, approvalCard]);
+      gsap.killTweensOf(root.querySelectorAll("[data-line]"));
+      for (const run of [denied, paid]) {
+        showCaret(run, false);
+        for (const seg of Array.from(
+          run.querySelectorAll<HTMLElement>("[data-type]"),
+        )) {
+          seg.textContent = "";
+        }
+        gsap.set(run, { opacity: 1 });
+      }
+      gsap.set(root.querySelectorAll("[data-line]"), { opacity: 0 });
+      denied.classList.remove("hidden");
+      paid.classList.add("hidden");
+      approval.classList.replace("flex", "hidden");
+      gsap.set(approval, { opacity: 1 });
+      approvalIcon.classList.remove("text-primary");
+      setErrorBorder(false);
+      replayButton.classList.replace("inline-flex", "hidden");
+    };
+
+    const play = async () => {
+      const myGeneration = generation;
+      const live = () => generation === myGeneration;
+
+      /* Run 1: bare curl → 402 Payment Required */
+      await typeCommand(denied, live);
+      if (!live()) return;
+      await printLines(denied, live);
+      if (!live()) return;
+      void blipErrorBorder();
+      await sleep(800);
+      if (!live()) return;
+      await gsap.to(denied, { opacity: 0, duration: 0.1, ease: "power2.in" });
+      if (!live()) return;
+      setErrorBorder(false);
+      denied.classList.add("hidden");
+      gsap.set(denied, { opacity: 1 });
+
+      /* Run 2: tpay curl → spending approval → 200 OK */
+      paid.classList.remove("hidden");
+      await typeCommand(paid, live);
+      if (!live()) return;
+      approval.classList.replace("hidden", "flex");
+      gsap.fromTo(approval, { opacity: 0 }, { opacity: 1, duration: 0.2 });
+      gsap.fromTo(
+        approvalCard,
+        { opacity: 0, scale: 0.92, y: 10 },
+        {
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          duration: 0.35,
+          ease: "back.out(1.7)",
+          clearProps: "transform",
+        },
+      );
+      await sleep(1000);
+      if (!live()) return;
+      approvalIcon.classList.add("text-primary");
+      await sleep(400);
+      if (!live()) return;
+      approval.classList.replace("flex", "hidden");
+      gsap.set(approval, { opacity: 1 });
+      await sleep(180);
+      if (!live()) return;
+      await printLines(paid, live);
+      if (!live()) return;
+      replayButton.classList.replace("hidden", "inline-flex");
+    };
+
+    replayButton.addEventListener("click", () => {
+      reset();
+      void play();
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          io.disconnect();
+          void play();
+        }
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(root);
+  }
+</script>
