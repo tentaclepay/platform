@@ -7,6 +7,50 @@ const tabs = [
   { id: "x402", label: "x402", status: "Live" },
   { id: "mpp", label: "MPP", status: "Soon" },
 ] as const;
+
+const services = [
+  {
+    name: "Exa",
+    detail: "Web search built for agents",
+    price: "$0.01",
+    unit: "/ search",
+    protocol: "x402",
+    offset: "",
+    fade: false,
+  },
+  {
+    name: "Walrus",
+    detail: "Decentralized blob storage",
+    price: "$0.005",
+    unit: "/ upload",
+    protocol: "x402",
+    offset: "md:ml-24",
+    fade: false,
+  },
+  {
+    name: "DeepBook",
+    detail: "Live order-book market data",
+    price: "$0.002",
+    unit: "/ query",
+    protocol: "mpp",
+    offset: "md:ml-10",
+    fade: false,
+  },
+  {
+    name: "StableEnrich",
+    detail: "People & company enrichment",
+    price: "$0.25",
+    unit: "/ lookup",
+    protocol: "x402",
+    offset: "md:ml-16",
+    fade: true,
+  },
+] as const;
+
+const protocolBadge: Record<(typeof services)[number]["protocol"], string> = {
+  x402: "border-emerald-400/40 text-emerald-400",
+  mpp: "border-sky-400/40 text-sky-400",
+};
 ---
 
 <section
@@ -162,6 +206,47 @@ const tabs = [
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Right: example services agents pay for, floating over the tentacles -->
+    <div data-reveal-group class="flex flex-col gap-4">
+      {
+        services.map(
+          ({ name, detail, price, unit, protocol, offset, fade }) => (
+            <article
+              aria-hidden={fade ? "true" : undefined}
+              class:list={[
+                "max-w-sm border border-border bg-card/80 p-5 backdrop-blur-sm",
+                offset,
+                fade &&
+                  "pointer-events-none select-none mask-[linear-gradient(black,transparent_90%)]",
+              ]}
+            >
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex flex-col gap-1">
+                  <h3 class="text-sm font-medium text-foreground">{name}</h3>
+                  <p class="text-sm text-foreground/60">{detail}</p>
+                </div>
+                <span
+                  class:list={[
+                    "inline-flex shrink-0 items-center gap-1.5 border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-widest",
+                    protocolBadge[protocol],
+                  ]}
+                >
+                  <span class="size-1 bg-current" />
+                  {protocol}
+                </span>
+              </div>
+              <div class="mt-4 flex items-baseline gap-1.5 border-t border-border pt-3 font-mono">
+                <span class="text-lg text-foreground">{price}</span>
+                <span class="text-xs uppercase tracking-wider text-muted-foreground">
+                  {unit}
+                </span>
+              </div>
+            </article>
+          ),
+        )
+      }
     </div>
   </div>
 </section>
