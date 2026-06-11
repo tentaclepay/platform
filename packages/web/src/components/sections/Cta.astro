@@ -39,10 +39,14 @@ import { LINKS } from "@/consts";
         data-split
         class="max-w-4xl font-heading text-5xl md:text-[clamp(3.75rem,9vw,8rem)] uppercase leading-[0.85] tracking-wide"
       >
-        Agents <span class="text-primary">transact</span><br /><span
-          class="text-transparent [-webkit-text-stroke:2px_var(--primary)]"
-          >capital</span
-        > moves
+        <span class="text-primary">Agents</span>
+        <span
+          class="text-transparent [-webkit-text-stroke:2px_var(--foreground)]"
+          >transact</span
+        ><br />capital
+        <span class="text-transparent [-webkit-text-stroke:2px_var(--primary)]">
+          moves</span
+        >
       </h2>
 
       <div data-reveal-group class="flex flex-col items-center gap-7">
@@ -56,11 +60,11 @@ import { LINKS } from "@/consts";
             href={LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex h-11 w-fit items-center justify-center gap-2 bg-primary px-6 font-mono text-sm font-medium uppercase tracking-wider text-primary-foreground transition-colors duration-150 ease-out hover:bg-accent active:scale-[0.97]"
+            class="group inline-flex h-11 w-fit items-center justify-center gap-2 bg-primary px-6 font-mono text-sm font-medium uppercase tracking-wider text-primary-foreground transition-colors duration-150 ease-out hover:bg-accent active:scale-[0.97]"
           >
             <Github class="size-4" />
             Star on GitHub
-            <Star class="size-4" />
+            <Star class="size-4 group-hover:fill-background" />
           </a>
           <a
             href={LINKS.docs}
