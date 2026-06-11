@@ -1,6 +1,6 @@
 /**
- * Site-wide metadata — single source of truth for SEO, social cards, and the
- * web manifest. Consumed by `src/layouts/Layout.astro`.
+ * Site-wide metadata — single source of truth for SEO, social cards, and
+ * structured data. Consumed by `src/layouts/Layout.astro` and components.
  */
 export const SITE = {
   name: "Tentacle Pay",
@@ -10,9 +10,19 @@ export const SITE = {
   url: "https://tentaclepay.com",
   /** 1200×630 social card, served from /public. */
   ogImage: "/og.jpg",
+  ogImageAlt:
+    "Tentacle Pay — payment infrastructure for autonomous agents on Sui",
   /** Used for twitter:site and twitter:creator. */
   twitter: "@tentaclepay",
   locale: "en_US",
-  /** `.dark` --background token from global.css (≈ zinc-950). */
-  themeColor: "#09090b",
+  /** `.dark` --background token from global.css (abyss black). */
+  themeColor: "#0b080c",
+} as const;
+
+/** External destinations referenced across the site. */
+export const LINKS = {
+  github: "https://github.com/tentaclepay",
+  x: "https://x.com/tentaclepay",
+  docs: "https://docs.tentaclepay.com",
+  x402Quickstart: "https://docs.tentaclepay.com/x402/quickstart",
 } as const;

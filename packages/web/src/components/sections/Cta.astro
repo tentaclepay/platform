@@ -1,64 +1,77 @@
 ---
-import { ChevronRight, Star } from "@lucide/astro";
+import { Star } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
+
+import { LINKS } from "@/consts";
 ---
 
 <section
   id="cta"
-  class="relative w-full min-h-screen flex items-center py-24 md:py-0 overflow-hidden"
+  aria-labelledby="cta-heading"
+  class="relative flex min-h-screen w-full items-center overflow-hidden py-28 md:py-24"
 >
-  <!-- Soft primary glow -->
+  <!-- Flat sonar rings where the glow used to live -->
   <div
-    class="absolute inset-0 z-0 flex items-center justify-center select-none pointer-events-none"
+    class="absolute inset-0 z-0 hidden md:flex items-center justify-center select-none pointer-events-none"
     aria-hidden="true"
   >
     <div
-      class="size-[36rem] max-w-full rounded-full bg-primary/15 blur-[140px]"
+      class="absolute size-136 max-w-[90vw] rounded-full border border-primary/25"
     >
     </div>
+    <div
+      class="absolute size-192 max-w-[130vw] rounded-full border border-primary/15"
+    >
+    </div>
+    <div class="absolute size-256 rounded-full border border-primary/8"></div>
   </div>
 
   <div class="relative z-10 container mx-auto px-6">
-    <div class="flex flex-col items-center text-center gap-6">
-      <span
-        class="font-mono text-xs uppercase tracking-widest text-muted-foreground"
+    <div class="flex flex-col items-center gap-7 text-center">
+      <p
+        data-reveal
+        class="font-mono text-xs font-medium uppercase tracking-widest text-muted-foreground"
       >
         // Agentic economy
-      </span>
+      </p>
       <h2
-        class="font-heading uppercase text-6xl md:text-8xl leading-[0.95] max-w-4xl"
+        id="cta-heading"
+        data-split
+        class="max-w-4xl font-heading text-5xl md:text-[clamp(3.75rem,9vw,8rem)] uppercase leading-[0.85] tracking-wide"
       >
         Agents <span class="text-primary">transact</span><br /><span
-          class="text-primary">capital</span
+          class="text-transparent [-webkit-text-stroke:2px_var(--primary)]"
+          >capital</span
         > moves
       </h2>
-      <p class="text-base text-foreground/60 max-w-md leading-relaxed">
-        Tentacle Pay is open source. Read the code, wire up the rails, and put
-        your agents to work — gasless on Sui.
-      </p>
 
-      <div
-        class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2 pt-2"
-      >
-        <a
-          href="https://github.com/tentaclepay"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex w-fit items-center justify-center gap-2 bg-primary font-mono text-primary-foreground hover:bg-primary/80 active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out px-5 h-10 rounded-lg font-medium"
-        >
-          <Github class="size-4" />
-          Star on GitHub
-          <Star class="size-4" />
-        </a>
-        <a
-          href="https://docs.tentaclepay.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="inline-flex w-fit items-center justify-center gap-1.5 font-mono text-foreground border border-primary/60 hover:border-primary active:scale-[0.97] transition-[transform,border] duration-150 ease-out px-5 pr-3 h-10 rounded-lg font-medium"
-        >
-          Read the docs
-          <ChevronRight class="size-4" />
-        </a>
+      <div data-reveal-group class="flex flex-col items-center gap-7">
+        <p class="max-w-md text-base leading-relaxed text-foreground/60">
+          Tentacle Pay is open source. Read the code, wire up the rails, and put
+          your agents to work — gasless on Sui.
+        </p>
+
+        <div class="flex flex-wrap items-center justify-center gap-x-3 gap-y-2">
+          <a
+            href={LINKS.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex h-11 w-fit items-center justify-center gap-2 bg-primary px-6 font-mono text-sm font-medium uppercase tracking-wider text-primary-foreground transition-colors duration-150 ease-out hover:bg-accent active:scale-[0.97]"
+          >
+            <Github class="size-4" />
+            Star on GitHub
+            <Star class="size-4" />
+          </a>
+          <a
+            href={LINKS.docs}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex h-11 w-fit items-center justify-center gap-2 border border-border px-6 font-mono text-sm font-medium uppercase tracking-wider text-foreground transition-colors duration-150 ease-out hover:border-primary hover:text-primary active:scale-[0.97]"
+          >
+            Read the docs
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

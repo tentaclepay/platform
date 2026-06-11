@@ -1,70 +1,210 @@
 ---
-import { ArrowUpRight } from "@lucide/astro";
+import { Menu, X } from "@lucide/astro";
 import { Github } from "simple-icons-astro";
+
+import { LINKS } from "@/consts";
+
+const nav = [
+  { label: "Payments", href: "#payments" },
+  { label: "Cross-Chain", href: "#cross-chain" },
+  { label: "Wallet", href: "#wallet" },
+] as const;
 ---
 
 <header
-  class="fixed left-0 top-0 z-50 w-full border-b border-border bg-background/10 backdrop-blur-lg"
+  data-header
+  class="fixed left-0 top-0 z-50 w-full border-b border-border/40 bg-transparent transition-colors duration-300 data-scrolled:border-border data-scrolled:bg-background/95 data-scrolled:backdrop-blur-sm"
 >
-  <div class="container mx-auto flex items-center justify-between px-6 py-3">
-    <!-- Logo + Title -->
+  <div class="container mx-auto flex h-16 items-center justify-between px-6">
+    <!-- Wordmark -->
     <a
-      href="#"
-      class="flex items-center gap-2.5 shrink-0 transition-transform duration-150 ease-out active:scale-[0.98]"
+      href="#hero"
+      class="flex shrink-0 items-center gap-3 transition-transform duration-150 ease-out active:scale-[0.98]"
     >
-      <img src="/logo.svg" alt="Tentacle Pay" class="h-10 w-auto rounded-md" />
-      <span class="text-foreground font-semibold text-base tracking-tight"
-        >Tentacle Pay</span
+      <img src="/logo.svg" alt="" width="256" height="256" class="h-9 w-9" />
+      <span
+        class="font-heading text-2xl uppercase leading-none tracking-wide text-foreground"
       >
+        Tentacle<span class="text-primary">Pay</span>
+      </span>
     </a>
 
-    <!-- Center Nav -->
-    <nav class="hidden md:flex items-center gap-1">
+    <!-- Desktop nav -->
+    <nav aria-label="Primary" class="hidden items-center gap-8 md:flex">
       {
-        [
-          { label: "Payments", href: "#payments" },
-          { label: "Cross-Chain", href: "#cross-chain" },
-          { label: "Wallet", href: "#wallet" },
-          {
-            label: "Docs",
-            href: "https://docs.tentaclepay.com",
-            external: true,
-          },
-        ].map(({ label, href, external }) => {
-          if (external)
-            return (
-              <a
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="inline-flex items-center gap-1 px-3.5 py-1.5 text-sm text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
-              >
-                {label}
-                <ArrowUpRight class="size-4" />
-              </a>
-            );
-
-          return (
-            <a
-              href={href}
-              class="px-3.5 py-1.5 text-sm text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
-            >
-              {label}
-            </a>
-          );
-        })
+        nav.map(({ index, label, href }) => (
+          <a
+            href={href}
+            class="group inline-flex items-baseline gap-1.5 font-mono text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
+          >
+            <span class="text-[10px] text-primary">{index}</span>
+            {label}
+          </a>
+        ))
       }
+      <a
+        href={LINKS.docs}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-baseline gap-1.5 font-mono text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors duration-150 ease-out hover:text-foreground"
+      >
+        Docs
+        <span aria-hidden="true" class="text-primary">↗</span>
+      </a>
     </nav>
 
-    <!-- GitHub CTA -->
-    <a
-      href="https://github.com/tentaclepay"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-flex items-center gap-2 text-sm text-muted-foreground transition-[color,transform] duration-150 ease-out hover:text-foreground active:scale-[0.98]"
-    >
-      <Github class="size-4" />
-      <span class="hidden md:inline">github/tentaclepay</span>
-    </a>
+    <!-- Right: GitHub + mobile menu toggle -->
+    <div class="flex items-center gap-2">
+      <a
+        href={LINKS.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden h-9 items-center gap-2 border border-border px-3.5 font-mono text-xs font-medium uppercase tracking-widest text-muted-foreground transition-colors duration-150 ease-out hover:border-primary hover:text-foreground md:inline-flex"
+      >
+        <Github class="size-3.5" />
+        GitHub
+      </a>
+      <button
+        type="button"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open menu"
+        class="group inline-flex size-9 items-center justify-center border border-border text-foreground transition-colors duration-150 ease-out hover:border-primary md:hidden"
+      >
+        <Menu class="size-4 group-aria-expanded:hidden" />
+        <X class="hidden size-4 group-aria-expanded:block" />
+      </button>
+    </div>
   </div>
 </header>
+
+<!-- Mobile menu overlay — kept outside <header> so backdrop-filter on the
+     scrolled header doesn't become a containing block and collapse this element -->
+<div
+  id="mobile-menu"
+  data-menu
+  hidden
+  class="fixed inset-x-0 bottom-0 top-16 z-40 flex-col justify-between overflow-y-hidden border-t border-border bg-background px-6 pb-10 pt-12 md:hidden"
+>
+  <nav aria-label="Mobile" class="flex flex-col">
+    {
+      nav.map(({ label, href }) => (
+        <a
+          href={href}
+          data-menu-link
+          class="group flex items-baseline gap-4 border-b border-border py-5"
+        >
+          <span class="font-heading text-5xl uppercase leading-none text-foreground transition-colors duration-150 group-hover:text-primary">
+            {label}
+          </span>
+        </a>
+      ))
+    }
+    <a
+      href={LINKS.docs}
+      target="_blank"
+      rel="noopener noreferrer"
+      data-menu-link
+      class="group flex items-baseline gap-4 border-b border-border py-5"
+    >
+      <span
+        class="font-heading text-5xl uppercase leading-none text-foreground transition-colors duration-150 group-hover:text-primary"
+      >
+        Docs
+      </span>
+      <span aria-hidden="true" class="font-mono text-4xl text-primary">↗</span
+      >
+    </a>
+  </nav>
+
+  <div data-menu-link class="flex items-center justify-between pt-10">
+    <a
+      href={LINKS.github}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-flex h-10 items-center gap-2 bg-background border border-border px-4 font-mono text-xs font-medium uppercase tracking-widest text-foreground"
+    >
+      <Github class="size-3.5" />
+      GitHub
+    </a>
+    <span
+      class="font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+    >
+      Built on Sui
+    </span>
+  </div>
+</div>
+
+<script>
+  import { gsap } from "gsap";
+
+  const toggle =
+    document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu = document.querySelector<HTMLElement>("[data-menu]");
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (toggle && menu) {
+    const links = menu.querySelectorAll<HTMLElement>("[data-menu-link]");
+    let open = false;
+
+    const setOpen = (next: boolean) => {
+      open = next;
+      toggle.setAttribute("aria-expanded", String(next));
+      toggle.setAttribute("aria-label", next ? "Close menu" : "Open menu");
+      document.documentElement.classList.toggle("overflow-hidden", next);
+
+      if (next) {
+        menu.hidden = false;
+        menu.style.display = "flex";
+        if (reduced.matches) return;
+        gsap.fromTo(
+          menu,
+          { opacity: 0 },
+          { opacity: 1, duration: 0.25, ease: "power2.out" },
+        );
+        gsap.fromTo(
+          links,
+          { y: 28, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.5,
+            stagger: 0.06,
+            ease: "power3.out",
+            clearProps: "transform",
+          },
+        );
+        return;
+      }
+
+      const close = () => {
+        menu.hidden = true;
+        menu.style.display = "";
+      };
+      if (reduced.matches) {
+        close();
+        return;
+      }
+      gsap.to(menu, {
+        opacity: 0,
+        duration: 0.2,
+        ease: "power2.in",
+        onComplete: close,
+      });
+    };
+
+    toggle.addEventListener("click", () => setOpen(!open));
+    for (const link of links) {
+      link.addEventListener("click", (event) => {
+        if ((event.target as HTMLElement).closest("a")) setOpen(false);
+      });
+    }
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && open) setOpen(false);
+    });
+    window.matchMedia("(min-width: 48rem)").addEventListener("change", (m) => {
+      if (m.matches && open) setOpen(false);
+    });
+  }
+</script>

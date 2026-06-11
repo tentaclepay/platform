@@ -1,49 +1,75 @@
 ---
-import { ChevronRight } from "@lucide/astro";
+import { LINKS } from "@/consts";
 ---
 
 <section
   id="hero"
-  class="relative flex w-full min-h-screen before:content-[''] before:absolute before:inset-0 before:-z-10 before:bg-[url('/images/hero.webp')] before:bg-cover before:bg-position-[30%] before:brightness-40 md:before:brightness-70 md:before:bg-center before:bg-no-repeat before:mask-[radial-gradient(closest-side,black_70%,transparent)]"
+  class="relative flex min-h-screen w-full flex-col overflow-hidden"
 >
+  <!-- Background: abyss octopus (same position as before — left of center) -->
+  <img
+    data-hero-img
+    src="/images/hero.webp"
+    alt=""
+    aria-hidden="true"
+    width="5504"
+    height="3072"
+    fetchpriority="high"
+    loading="eager"
+    decoding="async"
+    class="js:motion-safe:opacity-0 absolute inset-0 -z-10 h-full w-full select-none object-cover object-[30%_center] brightness-40 mask-[radial-gradient(closest-side,black_70%,transparent)] md:object-center md:brightness-70"
+  />
+
   <div
-    class="flex flex-col container mx-auto justify-center md:justify-start md:pt-36 xl:pt-72 px-6 gap-6"
+    data-hero
+    class="js:motion-safe:opacity-0 container mx-auto flex flex-1 flex-col justify-center gap-8 px-6 py-24"
   >
-    <div class="flex flex-col">
-      <h1 class="font-heading uppercase text-8xl">
-        Let your <br />agents <span class="text-primary">transact</span>
+    <div class="flex flex-col gap-5">
+      <h1
+        data-hero-title
+        class="font-heading text-8xl md:text-[clamp(3rem,10vw,9rem)] uppercase leading-[0.85] tracking-wide"
+      >
+        <span class="block">Let your</span>
+        <span class="inline"> agents </span>
+        <span class="text-primary">transact</span>
       </h1>
-      <p class="text-sm text-foreground/60">
+
+      <p data-hero-item class="max-w-md text-base text-foreground/60">
         Agents are already running code. Now, let them run the economy.
       </p>
     </div>
-    <div class="flex flex-col gap-2">
-      <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+
+    <div class="flex flex-col gap-4">
+      <div data-hero-item class="flex flex-wrap items-center gap-x-3 gap-y-2">
         <a
           href="#payments"
-          class="inline-flex w-fit bg-primary font-mono text-primary-foreground hover:bg-primary/80 active:scale-[0.97] transition-[transform,background-color] duration-150 ease-out px-5 h-10 rounded-lg items-center justify-center font-medium"
+          class="inline-flex h-11 w-fit items-center justify-center gap-2 bg-primary px-6 font-mono text-sm font-medium uppercase tracking-wider text-primary-foreground transition-colors duration-150 ease-out hover:bg-accent active:scale-[0.97]"
         >
           Explore
+          <span aria-hidden="true">↓</span>
         </a>
         <a
-          href="https://docs.tentaclepay.com"
+          href={LINKS.docs}
           target="_blank"
           rel="noopener noreferrer"
-          class="inline-flex w-fit font-mono text-foreground border border-primary/60 hover:border-primary active:scale-[0.97] transition-[transform,border] duration-150 ease-out px-5 pr-3 gap-1.5 h-10 rounded-lg items-center justify-center font-medium"
+          class="inline-flex h-11 w-fit items-center justify-center gap-2 border border-border px-6 font-mono text-sm font-medium uppercase tracking-wider text-foreground transition-colors duration-150 ease-out hover:border-primary hover:text-primary active:scale-[0.97]"
         >
           Read the docs
-          <ChevronRight class="size-4" />
+          <span aria-hidden="true">↗</span>
         </a>
       </div>
       <p
-        class="flex flex-col gap-x-2.5 gap-y-1 items-start md:inline-flex md:flex-row md:items-end"
+        data-hero-item
+        class="flex flex-col items-start gap-x-2.5 gap-y-1 md:inline-flex md:flex-row md:items-end"
       >
-        <span class="text-foreground/40 text-sm">
+        <span class="text-sm text-foreground/40">
           Built exclusively for autonomous agents on
         </span>
         <img
           src="/sui_full_white.svg"
           alt="Sui"
+          width="84"
+          height="32"
           class="inline-flex h-6 w-auto opacity-50"
         />
       </p>

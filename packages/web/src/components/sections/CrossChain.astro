@@ -1,22 +1,30 @@
 ---
-
+const points = [
+  "Your agent keeps a single Sui wallet.",
+  "Pay for services wherever they live.",
+  "Spend the coins you already hold.",
+] as const;
 ---
 
 <section
   id="cross-chain"
-  class="relative w-full min-h-screen flex items-center py-24 md:py-0 overflow-hidden"
+  aria-labelledby="cross-chain-heading"
+  class="relative flex min-h-screen w-full items-center overflow-hidden py-28 md:py-24"
 >
-  <!-- Background slot (LEFT). Image to be supplied later → /backgrounds/crosschain.webp -->
+  <!-- Background: coin tentacles (left-aligned on desktop, full-bleed dimmed on mobile) -->
   <div
     class="absolute inset-0 z-0 select-none pointer-events-none"
     aria-hidden="true"
   >
     <img
+      data-img-reveal
       src="/images/crosschain.webp"
       alt=""
-      class="absolute inset-0 h-full w-full object-cover object-center brightness-40 md:inset-y-0 md:right-auto md:left-32 md:h-full md:w-auto md:max-w-[50%] md:object-contain md:object-left md:brightness-85 mask-[radial-gradient(closest-side,black_70%,transparent)]"
+      width="4100"
+      height="4096"
       loading="lazy"
       decoding="async"
+      class="absolute inset-0 h-full w-full object-cover object-center brightness-40 mask-[radial-gradient(closest-side,black_70%,transparent)] md:inset-y-0 md:right-auto md:left-32 md:h-full md:w-auto md:max-w-[50%] md:object-contain md:object-left md:brightness-85"
     />
   </div>
 
@@ -24,34 +32,53 @@
     class="relative z-10 container mx-auto grid items-center gap-12 px-6 md:grid-cols-2 md:gap-16"
   >
     <!-- Right: content (col 2 on desktop) -->
-    <div class="flex flex-col gap-6 md:col-start-2">
-      <div class="flex flex-col gap-3">
-        <span
-          class="font-mono text-xs uppercase tracking-widest text-muted-foreground"
+    <div class="flex flex-col gap-7 md:col-start-2">
+      <div class="flex flex-col gap-4">
+        <p
+          data-reveal
+          class="font-mono text-xs font-medium uppercase tracking-widest text-muted-foreground"
         >
           // Cross-Chain
-        </span>
-        <h2 class="font-heading uppercase text-6xl md:text-8xl leading-[0.95]">
-          Across the <span class="text-primary">Sea</span>
-        </h2>
-        <p class="text-sm text-foreground/60 max-w-md">
-          One Sui wallet. Every chain.
         </p>
+        <h2
+          id="cross-chain-heading"
+          data-split
+          class="font-heading text-[clamp(3.75rem,8.5vw,7.5rem)] uppercase leading-[0.85] tracking-wide"
+        >
+          Across the <span class="text-primary">sea</span>
+        </h2>
       </div>
 
-      <p class="text-base text-foreground/70 max-w-md leading-relaxed">
-        Pay for services on other chains straight from your
-        <span class="text-foreground font-medium">Sui wallet</span>, in
-        <span class="text-foreground font-medium">Sui stablecoins</span>. No
-        juggling a wallet per chain — keep one wallet and let your agents pay
-        <span class="text-primary font-medium">everywhere</span>.
-      </p>
+      <div data-reveal-group class="flex flex-col gap-6">
+        <p class="max-w-md text-sm text-foreground/60">
+          One Sui wallet. Every chain.
+        </p>
 
-      <span
-        class="inline-flex w-fit items-center gap-1.5 rounded-lg bg-background border border-border px-5 h-9 font-mono font-medium text-sm text-muted-foreground cursor-not-allowed select-none"
-      >
-        Coming soon
-      </span>
+        <p class="max-w-md text-base leading-relaxed text-foreground/70">
+          Pay for services on other chains straight from your
+          <span class="font-medium text-foreground">Sui wallet</span>, in
+          <span class="font-medium text-foreground">Sui stablecoins</span>. No
+          juggling a wallet per chain — keep one wallet and let your agents pay
+          <span class="font-medium text-primary">everywhere</span>.
+        </p>
+
+        <ul class="flex max-w-md flex-col gap-2">
+          {
+            points.map((point) => (
+              <li class="text-base leading-relaxed text-foreground/70">
+                {point}
+              </li>
+            ))
+          }
+        </ul>
+
+        <span
+          class="inline-flex h-10 w-fit select-none items-center gap-2 border border-primary px-5 font-mono text-xs font-medium uppercase tracking-widest text-primary"
+        >
+          <span class="size-1 bg-primary"></span>
+          Coming soon
+        </span>
+      </div>
     </div>
   </div>
 </section>

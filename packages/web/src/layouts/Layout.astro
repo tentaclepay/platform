@@ -3,7 +3,7 @@ import "../styles/global.css";
 
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import { SITE } from "@/consts";
+import { LINKS, SITE } from "@/consts";
 
 interface Props {
   title?: string;
@@ -22,14 +22,56 @@ const {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
 const ogImageURL = new URL(image, Astro.site).href;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE.url}/#organization`,
+      name: SITE.name,
+      url: SITE.url,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE.url}/logo.svg`,
+      },
+      sameAs: [LINKS.github, LINKS.x],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE.url}/#website`,
+      url: SITE.url,
+      name: SITE.name,
+      description: SITE.description,
+      inLanguage: "en",
+      publisher: { "@id": `${SITE.url}/#organization` },
+    },
+    {
+      "@type": "WebPage",
+      "@id": canonicalURL,
+      url: canonicalURL,
+      name: title,
+      description,
+      isPartOf: { "@id": `${SITE.url}/#website` },
+      primaryImageOfPage: ogImageURL,
+      inLanguage: "en",
+    },
+  ],
+};
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark motion-safe:scroll-smooth scroll-pt-16">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Marks JS as available before first paint; the `js:` Tailwind variant
+         hides GSAP targets only when this class lands. -->
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
 
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -41,6 +83,7 @@ const ogImageURL = new URL(image, Astro.site).href;
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content={SITE.themeColor} />
+    <meta name="color-scheme" content="dark" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -52,6 +95,7 @@ const ogImageURL = new URL(image, Astro.site).href;
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={SITE.ogImageAlt} />
     <meta property="og:locale" content={SITE.locale} />
 
     <!-- Twitter -->
@@ -61,19 +105,30 @@ const ogImageURL = new URL(image, Astro.site).href;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageURL} />
+    <meta name="twitter:image:alt" content={SITE.ogImageAlt} />
+
+    <!-- Structured data -->
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify(schema)}
+    />
   </head>
-  <body class="dark">
+  <body class="dark m-0 min-h-screen w-full bg-background text-foreground">
+    <a
+      href="#main"
+      class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:left-4 focus-visible:top-4 focus-visible:z-100 focus-visible:bg-primary focus-visible:px-4 focus-visible:py-2 focus-visible:font-mono focus-visible:text-sm focus-visible:font-medium focus-visible:text-primary-foreground"
+    >
+      Skip to content
+    </a>
     <Header />
-    <slot />
+    <main id="main">
+      <slot />
+    </main>
     <Footer />
   </body>
 </html>
 
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>
+<script>
+  import "@/lib/motion";
+</script>
