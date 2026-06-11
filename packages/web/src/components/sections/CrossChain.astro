@@ -1,11 +1,3 @@
----
-const points = [
-  "Your agent keeps a single Sui wallet.",
-  "Pay for services wherever they live.",
-  "Spend the coins you already hold.",
-] as const;
----
-
 <section
   id="cross-chain"
   aria-labelledby="cross-chain-heading"
@@ -62,15 +54,10 @@ const points = [
           <span class="font-medium text-primary">everywhere</span>.
         </p>
 
-        <ul class="flex max-w-md flex-col gap-2">
-          {
-            points.map((point) => (
-              <li class="text-base leading-relaxed text-foreground/70">
-                {point}
-              </li>
-            ))
-          }
-        </ul>
+        <p class="max-w-md text-base leading-relaxed text-foreground/70">
+          Your agent keeps a single Sui wallet. Pay for services wherever they
+          live. Spend the coins you already hold.
+        </p>
 
         <span
           class="inline-flex h-10 w-fit select-none items-center gap-2 border border-primary px-5 font-mono text-xs font-medium uppercase tracking-widest text-primary"
